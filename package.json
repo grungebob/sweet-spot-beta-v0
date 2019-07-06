@@ -1,0 +1,26 @@
+{
+  "name": "sweet-spot-beta-v0",
+  "version": "1.0.0",
+  "description": "Beta version of Sweet Spot",
+  "main": "index.js",
+  "scripts": {
+    "test": "npm run test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/grungebob/sweet-spot-beta-v0.git"
+  },
+  "author": "Robert Chung",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/grungebob/sweet-spot-beta-v0/issues"
+  },
+  "homepage": "https://github.com/grungebob/sweet-spot-beta-v0#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "node-spotify-api": "^1.1.1",
+    "nodemon": "^1.19.1",
+    "react": "^16.8.6",
+    "redux": "^4.0.1"
+  }
+}
