@@ -1,0 +1,64 @@
+@import url("https://fonts.googleapis.com/css?family=Montserrat:100");
+
+.App {
+  text-align: center;
+  background-color: #282c34;
+  height: 100vh;
+  
+}
+
+.App-logo {
+  animation: App-logo-spin infinite 20s linear;
+  height: 10vmin;
+  pointer-events: none;
+}
+
+.App-header {
+  background-color: #282c34;
+  font-family: Montserrat;
+  min-height: 10vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+.App-intro {
+  background-color: #282c34;
+  color: #ffffff;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+
+input[type=text] {
+  border-radius: 10px;  
+  width: 400px;
+  color: white;
+  box-sizing: border-box;
+  border: 2px solid #ccc;
+  font-size: 30px;
+  text-align: center;
+  background-color: #282c34;
+  background-position: 10px 10px; 
+  background-repeat: no-repeat;
+  padding: 20px 20px 20px 20px;
+  -webkit-transition: width 0.4s ease-in-out;
+  transition: width 0.4s ease-in-out;
+  }
+input[type=text]:focus {
+  width: 50%;
+}
