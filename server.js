@@ -9,6 +9,8 @@ const spotify = new Spotify({
 const express = require('express');
 const app = express();
 const port = process.env.PORT || 5000;
+
+//Body Parser:
 const bodyParser = require('body-parser');
 app.use(bodyParser.json());
 
@@ -21,7 +23,11 @@ app.get('/express_backend', (req, res) => {
 });
 
 app.post('/artistSearch', (req, res) => {
-    console.log('req boday', req.body)
+    const query = req.body.artist.replace(' ', '%20');
+    console.log('query', query);
+    spotify
+    .request('https://api.spotify.com/v1/search?q=' + query + '&type=artist')
+        .then(returned => console.log(returned.artists.items));
 
 
 })
