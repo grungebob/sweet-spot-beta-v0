@@ -7,7 +7,8 @@ class App extends Component {
     this.state = { 
       data: null,
       items: [],
-      searchTerm: ''
+      searchTerm: '',
+      searchResults: [],
     }
     this.onChange = this.onChange.bind(this);
     this.onKeyPress = this.onKeyPress.bind(this);
@@ -41,6 +42,9 @@ class App extends Component {
     });
     const body = await response.json();
     console.log('BODY: ', body);
+    this.setState({
+      searchResults: body
+    });
   }
 
   onChange (e) {
@@ -69,10 +73,16 @@ class App extends Component {
         </header>
         <p className="App-body">
           <input type="text" placeholder="Enter Artist Name" value={this.state.searchTerm} onChange={this.onChange} onKeyPress = {this.onKeyPress}/>
-        </p>
+        
         <p className="App-intro">{this.state.data}</p>
         <p className="App-intro">{this.state.data}</p>
-
+        {this.state.searchResults.map((artist) => 
+          <div>
+            <span>{artist.name} {artist.id}</span>
+           {artist.images[2] ? <img src={artist.images[2].url} alt= {artist.name}  height = '50vh'/> : ''}
+          </div>
+          )}
+      </p>
       </div>
     );
   }

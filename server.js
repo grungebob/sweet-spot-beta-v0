@@ -27,8 +27,19 @@ app.post('/artistSearch', (req, res) => {
     console.log('query', query);
     spotify
     .request('https://api.spotify.com/v1/search?q=' + query + '&type=artist')
-        .then(returned => console.log(returned.artists.items));
-
-
+        .then(response => {
+          const returnedArtists = response.artists.items;
+          let artists = [];
+          for (artist in returnedArtists){
+            artists.push(
+              {
+                id: returnedArtists[artist].id,
+                images: returnedArtists[artist].images,
+                name: returnedArtists[artist].name,
+              }
+            )
+          }
+          res.send(artists)
+        })
 })
 
