@@ -36,6 +36,8 @@
 
 .App-body {
   color: #ffffff;
+  font-family: Montserrat;
+  text-align: center;
 }
 
 @keyframes App-logo-spin {
