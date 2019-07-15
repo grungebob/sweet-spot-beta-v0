@@ -48,21 +48,30 @@ class App extends Component {
   }
 
   onChange (e) {
-    console.log(e.target.value);
     this.setState({
       searchTerm: e.target.value
     });
   }
 
   onKeyPress (e) {
-    console.log('e key', e.key);
     if (e.key === 'Enter') {
       this.searchForAnArtist(this.state.searchTerm)
-      console.log('ENTER: ', e);
       this.setState({
         searchTerm: ''
       });
     }
+  }
+
+  findTracks = async (artist) => {
+    console.log('Artist: ', artist);
+    const response = await fetch('/findAlbums', {
+      method: 'POST',
+      body: JSON.stringify({
+        artist: artist
+      }),
+      headers: {"Content-Type": "application/json"}
+    });
+    console.log('Albums', response)
   }
 
   render() {
@@ -71,17 +80,19 @@ class App extends Component {
         <header className="App-header">
           <h1 className="App-title">Sweet Spot</h1>
         </header>
-        <p className="App-body">
+        <div className="App-body">
           <input type="text" placeholder="Enter Artist Name" value={this.state.searchTerm} onChange={this.onChange} onKeyPress = {this.onKeyPress}/>
-        
-        {this.state.searchResults.map((artist) => 
-          <div>
-            <span>{artist.name}</span>
-           {artist.images[2] ? <img src={artist.images[2].url} alt= {artist.name}  height = '50vh'/> : ''}
+          <div className='Artist-list'>
+            {this.state.searchResults.map((artist) => 
+              <div className="Single-artist" onClick={()=> this.findTracks(artist)}>
+                {artist.images[2] ? <img src={artist.images[2].url} alt= {artist.name}  height = '50vh'/> : ''}
+                <span> {artist.name} </span>
+              </div>
+            )}
           </div>
-          )}
-      </p>
-      </div>
+         
+        </div>
+      </div> 
     );
   }
 }

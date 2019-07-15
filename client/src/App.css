@@ -1,9 +1,9 @@
-@import url("https://fonts.googleapis.com/css?family=Montserrat:100");
+@import url("https://fonts.googleapis.com/css?family=Montserrat:200");
 
 .App {
   text-align: center;
-  background-color: #282c34;
-  height: 100vh;
+  background-color: #131518;
+  height: 200vh;
   
 }
 
@@ -14,7 +14,7 @@
 }
 
 .App-header {
-  background-color: #282c34;
+  background-color: #131518;
   font-family: Montserrat;
   min-height: 10vh;
   display: flex;
@@ -30,7 +30,7 @@
 }
 
 .App-intro {
-  background-color: #282c34;
+  background-color: #131518;
   color: #ffffff;
 }
 
@@ -38,6 +38,7 @@
   color: #ffffff;
   font-family: Montserrat;
   text-align: center;
+  font-weight: 600;
 }
 
 @keyframes App-logo-spin {
@@ -58,13 +59,40 @@ input[type=text] {
   border: 2px solid #ccc;
   font-size: 30px;
   text-align: center;
-  background-color: #282c34;
+  background-color: #131518;
   background-position: 10px 10px; 
   background-repeat: no-repeat;
   padding: 20px 20px 20px 20px;
   -webkit-transition: width 0.4s ease-in-out;
   transition: width 0.4s ease-in-out;
+  margin-bottom: 2vh;
   }
 input[type=text]:focus {
   width: 50%;
+}
+
+.Artist-list {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  justify-content: flex-start;
+  align-items: left;
+  text-align: center;
+  position: absolute;
+  vertical-align: middle;
+  left: 30vw;
+}
+
+span {
+  display: inline-block;
+  text-align: center;
+  vertical-align: middle;
+  line-height: normal;
+}
+
+.Single-artist {
+  display: flex;
+  flex-flow: row wrap;
+  vertical-align: middle;
+  margin-bottom: 1vh;
 }

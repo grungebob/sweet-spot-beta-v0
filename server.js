@@ -15,7 +15,7 @@ const bodyParser = require('body-parser');
 app.use(bodyParser.json());
 
 // console.log that your server is up and running
-app.listen(port, () => console.log(`Bruv - we listening on port ${port}`));
+app.listen(port, () => console.log(`ey bruv - listening on port ${port}`));
 
 // create a GET route
 app.get('/express_backend', (req, res) => {
@@ -24,7 +24,6 @@ app.get('/express_backend', (req, res) => {
 
 app.post('/artistSearch', (req, res) => {
     const query = req.body.artist.replace(' ', '%20');
-    console.log('query', query);
     spotify
     .request('https://api.spotify.com/v1/search?q=' + query + '&type=artist')
         .then(response => {
@@ -41,5 +40,18 @@ app.post('/artistSearch', (req, res) => {
           }
           res.send(artists)
         })
+})
+
+app.post('/findAlbums', (req, res)=> {
+
+  console.log('artist', req.body.artist.id);
+  const artistId = req.body.artist.id;
+  spotify
+  .request('https://api.spotify.com/v1/artists/' + artistId + '/albums')
+    .then(response => {
+      console.log('ARTIST ALBUMS', (response))
+    })
+
+  
 })
 
