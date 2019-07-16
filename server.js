@@ -79,20 +79,32 @@ app.post('/findAlbumTracks', (req, res)=> {
 
 app.post('/findRelatedArtists', (req, res) => {
   const artistId = req.body.artist.id;
-  console.log('ARTIST ID: ', artistId);
+  // console.log('ARTIST ID: ', artistId);
   spotify
   .request('https://api.spotify.com/v1/artists/' + artistId + '/related-artists')
     .then(response => {
-      console.log('RESPONSE: ', response);
+      // console.log('RESPONSE: ', response);
       let relatedArtists = [];
       for (artist in response.artists){
-        console.log('RELATED: ', response.artists[artist].id);
+        // console.log('RELATED: ', response.artists[artist].id);
         relatedArtists.push(response.artists[artist].id);
         }
       res.send(relatedArtists);  
       }
     )
     .catch(e => console.error('ERROR: ', e));
+})
 
-  
+app.post('/findTopTracks', (req, res) => {
+  const artistId = req.body.artist;
+  spotify
+  .request('https://api.spotify.com/v1/artists/'+ artistId + '/top-tracks?country=US')
+    .then(response => {
+      let relatedTracks = [];
+      for (track in response.tracks) {
+        relatedTracks.push(response.tracks[track].id);
+      }
+      res.send(relatedTracks);
+    })
+    .catch(e => console.error('ERROR: ', e));
 })

@@ -94,8 +94,17 @@ class App extends Component {
       headers: {"Content-Type": "application/json"}
     })
     const relatedArtists = await resRelatedArtists.json();
-    console.log('RELATED ARTISTS: ', relatedArtists);
-
+    for (let relatedArtist in relatedArtists) {
+      const resRelatedTracks = await fetch('/findTopTracks', {
+        method: 'POST',
+        body: JSON.stringify({
+          artist: relatedArtists[relatedArtist]
+        }),
+        headers: {"Content-Type": "application/json"}
+      })
+      const relatedTracks = await resRelatedTracks.json();
+      allTracks = allTracks.concat(relatedTracks);
+    }
     console.log('ALL TRACKS', allTracks);
   }
 
