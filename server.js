@@ -108,3 +108,30 @@ app.post('/findTopTracks', (req, res) => {
     })
     .catch(e => console.error('ERROR: ', e));
 })
+
+
+app.post('/audioFeatures', (req, res) => {
+  const trackId = req.body.track;
+  spotify
+  .request("https://api.spotify.com/v1/audio-features/" + trackId)
+    .then(response => {
+      res.send(response);
+    })
+    .catch(e => console.error('ERROR: ', e));
+})
+
+app.post('/multipleFeatures', async (req, res)=> {
+  const allTracks = req.body.tracks;
+  let featuresArr = [];
+  for (let i = 0; i < allTracks.length + 100; i += 100){
+    const miniArr = allTracks.slice(i, i + 100);
+    const featuresQuery = miniArr.join('%2C');
+    await spotify
+     .request('https://api.spotify.com/v1/audio-features?ids=' + featuresQuery)
+      .then (response => {
+        featuresArr = featuresArr.concat(response.audio_features);
+      })
+      .catch(e => console.error('ERROR: ', e));
+  }
+  res.send(featuresArr);
+})

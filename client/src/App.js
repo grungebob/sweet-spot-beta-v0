@@ -106,10 +106,22 @@ class App extends Component {
       const relatedTracks = await resRelatedTracks.json();
       allTracks = allTracks.concat(relatedTracks);
     }
-    console.log('ALL TRACKS', allTracks);
+    // console.log('ALL TRACKS', allTracks);
     this.setState({
       artistTracks: allTracks
     })
+
+    const resAudioFeatures = await fetch('/multipleFeatures', {
+      method: 'POST',
+      body: JSON.stringify({
+        tracks: this.state.artistTracks
+      }),
+      headers: {"Content-Type": "application/json"}
+    });
+    const audioFeatures = await resAudioFeatures.json()
+    console.log('AUDIO FEATURES ARRAY: ', audioFeatures);
+    
+
   }
 
   render() {
