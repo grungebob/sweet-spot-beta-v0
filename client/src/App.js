@@ -32,7 +32,7 @@ class App extends Component {
   };
 
   searchForAnArtist = async (name) => {
-    console.log('SEARCHING FOR: ', name);
+    // console.log('SEARCHING FOR: ', name);
     const response = await fetch('/artistSearch', {
       method: 'POST',
       body: JSON.stringify({
@@ -41,7 +41,7 @@ class App extends Component {
       headers: {"Content-Type": "application/json"}
     });
     const body = await response.json();
-    console.log('BODY: ', body);
+    // console.log('BODY: ', body);
     this.setState({
       searchResults: body
     });
@@ -63,7 +63,7 @@ class App extends Component {
   }
 
   findTracks = async (artist) => {
-    console.log('Artist: ', artist);
+    let allTracks = [];
     const response = await fetch('/findAlbums', {
       method: 'POST',
       body: JSON.stringify({
@@ -71,7 +71,32 @@ class App extends Component {
       }),
       headers: {"Content-Type": "application/json"}
     });
-    console.log('Albums', response)
+    const albums = await response.json();
+    // console.log('Albums', albums);
+    for (let album in albums){
+        // console.log('SEARCHING: ', albums[album])
+        const response = await fetch('/findAlbumTracks', {
+          method: 'POST',
+          body: JSON.stringify({
+            album: albums[album].id
+          }),
+          headers: {"Content-Type": "application/json"}
+        });
+        const albumResponse = await response.json();
+        allTracks = allTracks.concat(albumResponse);
+    }
+
+    const resRelatedArtists = await fetch('/findRelatedArtists', {
+      method: 'POST',
+      body: JSON.stringify({
+        artist: artist
+      }),
+      headers: {"Content-Type": "application/json"}
+    })
+    const relatedArtists = await resRelatedArtists.json();
+    console.log('RELATED ARTISTS: ', relatedArtists);
+
+    console.log('ALL TRACKS', allTracks);
   }
 
   render() {

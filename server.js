@@ -43,15 +43,56 @@ app.post('/artistSearch', (req, res) => {
 })
 
 app.post('/findAlbums', (req, res)=> {
-
-  console.log('artist', req.body.artist.id);
   const artistId = req.body.artist.id;
   spotify
-  .request('https://api.spotify.com/v1/artists/' + artistId + '/albums')
+  .request('https://api.spotify.com/v1/artists/' + artistId + '/albums?limit=50')
     .then(response => {
-      console.log('ARTIST ALBUMS', (response))
+      // console.log('ARTIST ALBUMS', (response));
+      let albums = [];
+      for (let album in response.items) {
+        albums.push({
+          id: response.items[album].id,
+          name: response.items[album].name
+        })
+      }
+      // console.log('Albums Array', albums);
+      res.send(albums);
     })
+    .catch(e => console.error('ERROR: ', e));
+})
+
+app.post('/findAlbumTracks', (req, res)=> {
+  // console.log('album id: ', req.body.album)
+  const albumId = req.body.album;
+  spotify
+  .request('https://api.spotify.com/v1/albums/' + albumId + '/tracks?limit=50')
+    .then(response => {
+      // console.log('ALBUM TRACKS: ', response);
+      let tracks = [];
+      for (let track in response.items) {
+        tracks.push(response.items[track].id);
+      }
+      res.send(tracks);
+    })
+    .catch(e => console.error('ERROR: ', e));
+})
+
+app.post('/findRelatedArtists', (req, res) => {
+  const artistId = req.body.artist.id;
+  console.log('ARTIST ID: ', artistId);
+  spotify
+  .request('https://api.spotify.com/v1/artists/' + artistId + '/related-artists')
+    .then(response => {
+      console.log('RESPONSE: ', response);
+      let relatedArtists = [];
+      for (artist in response.artists){
+        console.log('RELATED: ', response.artists[artist].id);
+        relatedArtists.push(response.artists[artist].id);
+        }
+      res.send(relatedArtists);  
+      }
+    )
+    .catch(e => console.error('ERROR: ', e));
 
   
 })
-
