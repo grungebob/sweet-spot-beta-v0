@@ -9,6 +9,7 @@ class App extends Component {
       items: [],
       searchTerm: '',
       searchResults: [],
+      artistTracks: [],
     }
     this.onChange = this.onChange.bind(this);
     this.onKeyPress = this.onKeyPress.bind(this);
@@ -106,6 +107,9 @@ class App extends Component {
       allTracks = allTracks.concat(relatedTracks);
     }
     console.log('ALL TRACKS', allTracks);
+    this.setState({
+      artistTracks: allTracks
+    })
   }
 
   render() {
