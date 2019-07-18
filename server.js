@@ -122,16 +122,20 @@ app.post('/audioFeatures', (req, res) => {
 
 app.post('/multipleFeatures', async (req, res)=> {
   const allTracks = req.body.tracks;
-  let featuresArr = [];
+  let promises = [];
   for (let i = 0; i < allTracks.length + 100; i += 100){
     const miniArr = allTracks.slice(i, i + 100);
     const featuresQuery = miniArr.join('%2C');
-    await spotify
-     .request('https://api.spotify.com/v1/audio-features?ids=' + featuresQuery)
-      .then (response => {
-        featuresArr = featuresArr.concat(response.audio_features);
-      })
-      .catch(e => console.error('ERROR: ', e));
+    promises.push(spotify
+     .request('https://api.spotify.com/v1/audio-features?ids=' + featuresQuery))
+      
   }
-  res.send(featuresArr);
+  Promise.all(promises).then(responses => {
+   const featuresArr = [].concat(...responses.map(res => res.audio_features));
+   res.send(featuresArr);
+  })
+  .catch(e => {
+    res.send(e).status(500);
+    console.error('ERROR: ', e)
+  });
 })

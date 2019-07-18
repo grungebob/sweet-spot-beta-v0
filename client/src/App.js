@@ -74,19 +74,29 @@ class App extends Component {
     });
     const albums = await response.json();
     // console.log('Albums', albums);
-    for (let album in albums){
-        // console.log('SEARCHING: ', albums[album])
-        const response = await fetch('/findAlbumTracks', {
-          method: 'POST',
-          body: JSON.stringify({
-            album: albums[album].id
-          }),
-          headers: {"Content-Type": "application/json"}
-        });
-        const albumResponse = await response.json();
-        allTracks = allTracks.concat(albumResponse);
-    }
+    // for (let album in albums){
+    //     // console.log('SEARCHING: ', albums[album])
+    //     const response = await fetch('/findAlbumTracks', {
+    //       method: 'POST',
+    //       body: JSON.stringify({
+    //         album: albums[album].id
+    //       }),
+    //       headers: {"Content-Type": "application/json"}
+    //     });
+    //     const albumResponse = await response.json();
+    //     allTracks = allTracks.concat(albumResponse);
+    // }
 
+   const promises = await Promise.all(albums.map(album => fetch('/findAlbumTracks', {
+    method: 'POST',
+    body: JSON.stringify({
+      album: album.id
+    }),
+    headers: {"Content-Type": "application/json"}
+  })));
+
+   allTracks = [].concat(...await Promise.all(promises.map(data => data.json())));
+   
     const resRelatedArtists = await fetch('/findRelatedArtists', {
       method: 'POST',
       body: JSON.stringify({
@@ -120,7 +130,6 @@ class App extends Component {
     });
     const audioFeatures = await resAudioFeatures.json()
     console.log('AUDIO FEATURES ARRAY: ', audioFeatures);
-    
 
   }
 
