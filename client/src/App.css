@@ -96,3 +96,16 @@ span {
   vertical-align: middle;
   margin-bottom: 1vh;
 }
+
+.flexcontainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.flexcontainer > div {
+  background-color: #282c34;
+  margin: 10px;
+  padding: 30px;
+  font-size: 30px;
+}

@@ -1,5 +1,10 @@
 import React, { Component } from 'react';
 import './App.css';
+import MoodSelect from './components/MoodSelect';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+import { compose } from 'recompose';
+import * as actionCreators from './actions/actionCreators'
 
 class App extends Component {
   constructor(props) {
@@ -140,6 +145,7 @@ class App extends Component {
           <h1 className="App-title">Sweet Spot</h1>
         </header>
         <div className="App-body">
+          <MoodSelect />
           <input type="text" placeholder="Enter Artist Name" value={this.state.searchTerm} onChange={this.onChange} onKeyPress = {this.onKeyPress}/>
           <div className='Artist-list'>
             {this.state.searchResults.map((artist) => 
@@ -156,4 +162,15 @@ class App extends Component {
   }
 }
 
-export default App;
+const mapStatetoProps = state => {
+    return {
+    };
+  }
+  
+  const mapDispatchToProps = {
+  };
+  
+
+  export default compose(
+    connect(mapStatetoProps, mapDispatchToProps)
+  )(App)
