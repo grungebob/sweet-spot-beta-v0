@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 import { compose } from 'recompose';
 import * as actionCreators from './actions/actionCreators'
 
-class App extends Component {
+export class App extends Component {
   constructor(props) {
     super(props);
     this.state = { 
@@ -171,6 +171,5 @@ const mapStatetoProps = state => {
   };
   
 
-  export default compose(
-    connect(mapStatetoProps, mapDispatchToProps)
-  )(App)
+  export default 
+    connect(mapStatetoProps, mapDispatchToProps)(App);
