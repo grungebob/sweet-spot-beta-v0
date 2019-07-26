@@ -1,9 +1,12 @@
 import { createStore, compose } from 'redux';
 import { syncHistoryWithStore } from 'react-router-redux';
-import { browserHistory } from 'react-router';
+import { createBrowserHistory } from 'history';
 
 // Import the Root Reducer
 import rootReducer from './reducers/index';
+
+// New History to accomodate changes to Redux:
+const browserHistory = createBrowserHistory();
 
 // Create an object for the default data
 const defaultState = {
