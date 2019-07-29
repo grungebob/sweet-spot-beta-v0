@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import './App.css';
 import MoodSelect from './components/MoodSelect';
-import { bindActionCreators } from 'redux';
+// import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { compose } from 'recompose';
-import * as actionCreators from './actions/actionCreators'
+// import * as actionCreators from './actions/actionCreators'
 
-export class App extends Component {
+class App extends Component {
   constructor(props) {
     super(props);
     this.state = { 
@@ -171,5 +171,5 @@ const mapStatetoProps = state => {
   };
   
 
-  export default 
-    connect(mapStatetoProps, mapDispatchToProps)(App);
+  export default compose(
+    connect(mapStatetoProps, mapDispatchToProps))(App);

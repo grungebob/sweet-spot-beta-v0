@@ -1,4 +1,4 @@
-function mood(state = [], action){
+function mood(state = {}, action){
     switch(action.type) {
         case 'SET_MOOD' :
             return {
