@@ -123,7 +123,7 @@ class App extends Component {
           <h1 className="App-title">Sweet Spot</h1>
         </header>
         <div className="App-body">
-          <MoodSelect prop1={'YO YO YO'} {...this.props}/>
+          <MoodSelect {...this.props}/>
           <input type="text" placeholder="Enter Artist Name" value={this.state.searchTerm} onChange={this.onChange} onKeyPress = {this.onKeyPress}/>
           <div className='Artist-list'>
             {this.state.searchResults.map((artist) => 

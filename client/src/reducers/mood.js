@@ -1,9 +1,10 @@
 function mood(state = {}, action){
     switch(action.type) {
-        case 'SET_MOOD' :
+        case 'SELECT_MOOD' :
+            console.log('SELECTING MOOD');
             return {
                 ...state,
-                desiredMood: action.mood
+                mood: action.mood
             }
         default:
             return state;
