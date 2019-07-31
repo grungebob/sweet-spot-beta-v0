@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import './App.css';
 import MoodSelect from './components/MoodSelect';
-// import { bindActionCreators } from 'redux';
+import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { compose } from 'recompose';
-// import * as actionCreators from './actions/actionCreators'
+import * as actionCreators from './actions/actionCreators'
 
 class App extends Component {
   constructor(props) {
@@ -21,20 +21,10 @@ class App extends Component {
   }
 
   componentDidMount() {
-      // Call our fetch function below once the component mounts
-    this.callBackendAPI()
-      .then(res => this.setState({ data: res.express }))
-      .catch(err => console.log(err));
   }
+
     // Fetches our GET route from the Express server. (Note the route we are fetching matches the GET route from server.js
   callBackendAPI = async () => {
-    const response = await fetch('/express_backend');
-    const body = await response.json();
-
-    if (response.status !== 200) {
-      throw Error(body.message) 
-    }
-    return body;
   };
 
   searchForAnArtist = async (name) => {
@@ -78,19 +68,7 @@ class App extends Component {
       headers: {"Content-Type": "application/json"}
     });
     const albums = await response.json();
-    // console.log('Albums', albums);
-    // for (let album in albums){
-    //     // console.log('SEARCHING: ', albums[album])
-    //     const response = await fetch('/findAlbumTracks', {
-    //       method: 'POST',
-    //       body: JSON.stringify({
-    //         album: albums[album].id
-    //       }),
-    //       headers: {"Content-Type": "application/json"}
-    //     });
-    //     const albumResponse = await response.json();
-    //     allTracks = allTracks.concat(albumResponse);
-    // }
+
 
    const promises = await Promise.all(albums.map(album => fetch('/findAlbumTracks', {
     method: 'POST',
@@ -121,7 +99,7 @@ class App extends Component {
       const relatedTracks = await resRelatedTracks.json();
       allTracks = allTracks.concat(relatedTracks);
     }
-    // console.log('ALL TRACKS', allTracks);
+
     this.setState({
       artistTracks: allTracks
     })
@@ -145,7 +123,7 @@ class App extends Component {
           <h1 className="App-title">Sweet Spot</h1>
         </header>
         <div className="App-body">
-          <MoodSelect />
+          <MoodSelect prop1={'YO YO YO'} {...this.props}/>
           <input type="text" placeholder="Enter Artist Name" value={this.state.searchTerm} onChange={this.onChange} onKeyPress = {this.onKeyPress}/>
           <div className='Artist-list'>
             {this.state.searchResults.map((artist) => 
@@ -167,7 +145,8 @@ const mapStatetoProps = state => {
     };
   }
   
-  const mapDispatchToProps = {
+  const mapDispatchToProps = dispatch => {
+    return bindActionCreators(actionCreators, dispatch);
   };
   
 

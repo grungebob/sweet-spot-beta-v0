@@ -1,12 +1,12 @@
 import React from 'react';
 import '../App.css';
 
-const MoodSelect = () => {
-
+const MoodSelect = (props) => {
+    // console.log(this.props);
         return (
             <div>
                 <div className="flexcontainer">
-                 <div>Relaxed</div>
+                 <div onClick={()=> console.log(this.props)}>Relaxed</div>
                  <div>Cheerful</div>
                  <div>Dancey</div>
                 </div>
