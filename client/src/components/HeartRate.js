@@ -37,10 +37,16 @@ class HeartRate extends React.Component {
         {
         const bpmAvg = 60000 * this.state.count / (msecs - this.state.msecsFirst);
         const bpmWhole = Math.round(bpmAvg);
-        this.state.count++;
+        this.setState({
+          count: this.state.count + 1
+        })
+        /*
         this.setState({
           bpm: bpmWhole
         });
+        \*/
+        this.props.setBpm(bpmWhole);
+        console.log('PROPS: ', this.props);
         }
         // this.state.msecsPrev = msecs;
         this.setState({
@@ -50,18 +56,16 @@ class HeartRate extends React.Component {
     }
 
     onChange (e) {
-      console.log(this.props);
-      this.setState({
-        bpm: e.target.value
-      })
+      console.log('HEART RATE PROPS: ', this.props);
+      this.props.setBpm(e.target.value);
     }
   
     render() {
       return (
         <div>
           <h2>Enter your heart rate or tap the heart to the beat of your pulse:</h2>
-          <h3>Heart Rate: {this.state.bpm} BPM</h3>
-          <input type="text" placeholder="Heart Rate (e.g. 104 BPM)" value={this.state.bpm} onChange={this.onChange} />
+          <h3>Heart Rate: {this.props.bpm.bpm} BPM</h3>
+          <input type="text" placeholder="Heart Rate (e.g. 104)" value={this.props.bpm.bpm} onChange={this.onChange} />
           <div onClick={this.calcBpm}>
                 <img src={heart} className="heart-logo" alt="heart"/>
           </div>

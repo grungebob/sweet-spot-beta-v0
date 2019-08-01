@@ -48,6 +48,7 @@ class App extends Component {
   }
 
   onChange (e) {
+    console.log('PROPS: ', this.props);
     this.setState({
       searchTerm: e.target.value
     });
@@ -147,6 +148,9 @@ class App extends Component {
 
 const mapStatetoProps = state => {
     return {
+      mood: state.mood,
+      bpm: state.bpm,
+      tracks: state.tracks,
     };
   }
   

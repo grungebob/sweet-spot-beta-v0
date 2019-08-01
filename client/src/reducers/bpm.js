@@ -1,6 +1,7 @@
-export default bpm = (state = {}, action)=> {
+function bpm (state = [], action) {
     switch(action.type) {
         case 'SET_BPM' :
+            console.log('BPM ACTION: ', action);
             return {
                 ...state,
                 bpm: Number(action.bpm)
@@ -9,3 +10,5 @@ export default bpm = (state = {}, action)=> {
             return state;
     }
 } 
+
+export default bpm;

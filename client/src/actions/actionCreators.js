@@ -4,3 +4,10 @@ export const selectMood = (mood) => {
         mood
     }
 }
+
+export const setBpm = (bpm) => {
+    return {
+        type: 'SET_BPM',
+        bpm
+    }
+}

@@ -11,7 +11,7 @@ const browserHistory = createBrowserHistory();
 // Create an object for the default data
 const defaultState = {
     mood: '',
-    bpm: 100,
+    bpm: '',
     search1Term: '',
     search1Results: [],
     artist1Tracks: [],

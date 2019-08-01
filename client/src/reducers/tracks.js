@@ -1,4 +1,4 @@
-function setTracks(state = [], action){
+function tracks(state = [], action){
     switch(action.type) {
         case 'SET_TRACKS' :
             return {
@@ -10,4 +10,4 @@ function setTracks(state = [], action){
     }
 }
 
-export default setTracks;
+export default tracks;
