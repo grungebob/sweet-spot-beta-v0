@@ -1,12 +1,11 @@
 import React from 'react';
-import '../App.css';
 
 const MoodSelect = (props) => {
     // QUESTION: WHY is it in props.mood.mood?
-    // console.log('MOOD SELECT PROPS: ', props);
+    console.log('MOOD SELECT PROPS: ', props);
         return (
             <div>
-                <h2>Select your desired mood: {props.mood.mood}</h2>
+                <h2>Select your desired mood: {props.mood.selectedMood}</h2>
                 <div className="flexcontainer">
                  <div onClick={()=>{props.selectMood('relaxed')}}>Relaxed</div>
                  <div onClick={()=>{props.selectMood('cheerful')}}>Cheerful</div>

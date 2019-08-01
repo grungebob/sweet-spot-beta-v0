@@ -1,14 +1,16 @@
 //QUESTION: why does state need to have a default?
+// A: The functionality, could do a conditional for undefineds or nulls
 
-function mood(state = {}, action){
+function mood(state ={}, action){
     switch(action.type) {
         case 'SELECT_MOOD' :
             console.log('SELECTING MOOD STATE: ', state);
             console.log('SELECTING MOOD ACTION: ', action);
 
             return {
+                //would need to put an if statement here if not there originally.
                 ...state,
-                mood: action.mood
+                selectedMood: action.mood
             }
         default:
             return state;

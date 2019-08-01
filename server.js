@@ -1,10 +1,25 @@
 //Spotify Key
+
+/*QUESTION: how can I import the spotify key from a different file?
+
+DEFAULT EXPORTS DO NOT USE BRACKETS
+BRACKETS WHEN IT'S NOT A DEFAULT
+
+Node by default doesn't do import export syntax, need to install babel
+But the react components understand it
+*/
+const  spot = require('./spotifyKey');
+
+
+
+/*
 const Spotify = require('node-spotify-api');
 
-const spotify = new Spotify({
+const spot = new Spotify({
     id: 'a6c3fc9fc35f459394775a03044f4e75',
     secret: '6aa61a57428341038924b598d6c97fc9'
   });
+  */
 
 const express = require('express');
 const app = express();
@@ -24,7 +39,7 @@ app.get('/express_backend', (req, res) => {
 
 app.post('/artistSearch', (req, res) => {
     const query = req.body.artist.replace(' ', '%20');
-    spotify
+    spot
     .request('https://api.spotify.com/v1/search?q=' + query + '&type=artist')
         .then(response => {
           const returnedArtists = response.artists.items;
@@ -44,7 +59,7 @@ app.post('/artistSearch', (req, res) => {
 
 app.post('/findAlbums', (req, res)=> {
   const artistId = req.body.artist.id;
-  spotify
+  spot
   .request('https://api.spotify.com/v1/artists/' + artistId + '/albums?limit=50')
     .then(response => {
       // console.log('ARTIST ALBUMS', (response));
@@ -64,7 +79,7 @@ app.post('/findAlbums', (req, res)=> {
 app.post('/findAlbumTracks', (req, res)=> {
   // console.log('album id: ', req.body.album)
   const albumId = req.body.album;
-  spotify
+  spot
   .request('https://api.spotify.com/v1/albums/' + albumId + '/tracks?limit=50')
     .then(response => {
       // console.log('ALBUM TRACKS: ', response);
@@ -80,7 +95,7 @@ app.post('/findAlbumTracks', (req, res)=> {
 app.post('/findRelatedArtists', (req, res) => {
   const artistId = req.body.artist.id;
   // console.log('ARTIST ID: ', artistId);
-  spotify
+  spot
   .request('https://api.spotify.com/v1/artists/' + artistId + '/related-artists')
     .then(response => {
       // console.log('RESPONSE: ', response);
@@ -97,7 +112,7 @@ app.post('/findRelatedArtists', (req, res) => {
 
 app.post('/findTopTracks', (req, res) => {
   const artistId = req.body.artist;
-  spotify
+  spot
   .request('https://api.spotify.com/v1/artists/'+ artistId + '/top-tracks?country=US')
     .then(response => {
       let relatedTracks = [];
@@ -112,7 +127,7 @@ app.post('/findTopTracks', (req, res) => {
 
 app.post('/audioFeatures', (req, res) => {
   const trackId = req.body.track;
-  spotify
+  spot
   .request("https://api.spotify.com/v1/audio-features/" + trackId)
     .then(response => {
       res.send(response);

@@ -28,19 +28,16 @@ class HeartRate extends React.Component {
           console.log('RESET COUNT? BEFORE: ', this.state.count);
           /* QUESTION:  this.state.count = works, but not setState??????
           this.state.count = 0;*/
-          this.state.count = 0;
-          console.log('RESET, COUNT? AFTER:', this.state.count);
-        }
-      if (this.state.count === 0){
-        console.log('FIRST ')
+          // this.state.count = 0;
+          console.log('FIRST ')
         this.setState({
           msecsFirst: msecs
         });
           this.setState({
             count: 1
           })
-        }
-      else {
+          console.log('RESET, COUNT? AFTER:', this.state.count);
+        } else {
         const bpmAvg = 60000 * this.state.count / (msecs - this.state.msecsFirst);
         const bpmWhole = Math.round(bpmAvg);
         this.setState({

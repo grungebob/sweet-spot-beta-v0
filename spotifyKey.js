@@ -5,4 +5,4 @@ const spotify = new Spotify({
     secret: '6aa61a57428341038924b598d6c97fc9'
   });
 
-export default spotify;
+module.exports = spotify;
