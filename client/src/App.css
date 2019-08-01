@@ -13,6 +13,10 @@
   pointer-events: none;
 }
 
+.heart-logo {
+  height: 10vh;
+}
+
 .App-header {
   background-color: #131518;
   font-family: Montserrat;

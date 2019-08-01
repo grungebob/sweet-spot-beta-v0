@@ -1,51 +1,69 @@
 import React from 'react';
+import heart from './heart.svg'
 
 class HeartRate extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-          bpm: 0,
+          bpm: '',
           count: 0,
           msecsFirst: 0,
           msecsPrev: 0
         }
         this.calcBpm = this.calcBpm.bind(this);
+        this.onChange = this.onChange.bind(this);
       }
-  
+
     calcBpm(e) {
-      var timeSeconds = new Date;
-      var msecs = timeSeconds.getTime();
+      const timeSeconds = new Date();
+      const msecs = timeSeconds.getTime();
   
       if ((msecs - this.state.msecsPrev) > 1000)
         {
-        this.state.count = 0;
+        this.setState({
+          count:0
+        })
         }
-      if (this.state.count == 0)
+      if (this.state.count === 0)
         {
-        this.state.msecsFirst = msecs;
-        this.state.count = 1;
+        this.setState({
+          msecsFirst: msecs
+        });
+        this.setState({
+          count: 1
+        })
         }
       else
         {
-        var bpmAvg = 60000 * this.state.count / (msecs - this.state.msecsFirst);
-        var bpmVal = Math.round(bpmAvg * 100) / 100;
-        var bpmWhole = Math.round(bpmAvg);
+        const bpmAvg = 60000 * this.state.count / (msecs - this.state.msecsFirst);
+        const bpmWhole = Math.round(bpmAvg);
         this.state.count++;
         this.setState({
           bpm: bpmWhole
         });
         }
-        this.state.msecsPrev = msecs;
+        // this.state.msecsPrev = msecs;
+        this.setState({
+          msecsPrev: msecs
+        })
       
+    }
+
+    onChange (e) {
+      console.log(this.props);
+      this.setState({
+        bpm: e.target.value
+      })
     }
   
     render() {
       return (
         <div>
+          <h2>Enter your heart rate or tap the heart to the beat of your pulse:</h2>
           <h3>Heart Rate: {this.state.bpm} BPM</h3>
-          <h4>Tap the logo to the beat of your pulse</h4>
-          <div id="logo">
-          <img class="logo" src="url.png" onClick={this.calcBpm} />
+          <input type="text" placeholder="Heart Rate (e.g. 104 BPM)" value={this.state.bpm} onChange={this.onChange} />
+          <div onClick={this.calcBpm}>
+                <img src={heart} className="heart-logo" alt="heart"/>
           </div>
         </div>
         )
