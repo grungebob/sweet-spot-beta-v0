@@ -17,6 +17,11 @@
   height: 10vh;
 }
 
+.heart-logo:active{
+  height: 15vh;
+  transition: 1s;
+}
+
 .App-header {
   background-color: #131518;
   font-family: Montserrat;

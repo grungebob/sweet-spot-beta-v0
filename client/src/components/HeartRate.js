@@ -17,38 +17,38 @@ class HeartRate extends React.Component {
     calcBpm(e) {
       const timeSeconds = new Date();
       const msecs = timeSeconds.getTime();
+
+      console.log('TIME SECS: ', timeSeconds);
+      console.log('MSECS: ', msecs);
+      console.log('Difference: ', msecs - this.state.msecsPrev);
+      console.log('COUNT: ', this.state.count);
+      console.log('GREATER THAN 1000? : ', (msecs - this.state.msecsPrev) > 1000);
   
-      if ((msecs - this.state.msecsPrev) > 1000)
-        {
-        this.setState({
-          count:0
-        })
+      if ((msecs - this.state.msecsPrev) > 1000){
+          console.log('RESET COUNT? BEFORE: ', this.state.count);
+          /* QUESTION:  this.state.count = works, but not setState??????
+          this.state.count = 0;*/
+          this.state.count = 0;
+          console.log('RESET, COUNT? AFTER:', this.state.count);
         }
-      if (this.state.count === 0)
-        {
+      if (this.state.count === 0){
+        console.log('FIRST ')
         this.setState({
           msecsFirst: msecs
         });
-        this.setState({
-          count: 1
-        })
+          this.setState({
+            count: 1
+          })
         }
-      else
-        {
+      else {
         const bpmAvg = 60000 * this.state.count / (msecs - this.state.msecsFirst);
         const bpmWhole = Math.round(bpmAvg);
         this.setState({
           count: this.state.count + 1
         })
-        /*
-        this.setState({
-          bpm: bpmWhole
-        });
-        \*/
         this.props.setBpm(bpmWhole);
         console.log('PROPS: ', this.props);
         }
-        // this.state.msecsPrev = msecs;
         this.setState({
           msecsPrev: msecs
         })

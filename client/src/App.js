@@ -130,6 +130,7 @@ class App extends Component {
         <div className="App-body">
           <HeartRate {...this.props}/>
           <MoodSelect {...this.props}/>
+          <h2>Select an artist you like:</h2>
           <input type="text" placeholder="Enter Artist Name" value={this.state.searchTerm} onChange={this.onChange} onKeyPress = {this.onKeyPress}/>
           <div className='Artist-list'>
             {this.state.searchResults.map((artist) => 
