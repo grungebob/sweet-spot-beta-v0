@@ -10,18 +10,10 @@ const browserHistory = createBrowserHistory();
 
 // Create an object for the default data
 const defaultState = {
-    desiredMood: '',
-    bpm: 100,
-    search1Term: '',
-    search1Results: [],
-    artist1Tracks: [],
-    search2Term: '',
-    search2Results: [],
-    artist2Tracks: [],
-    search3Term: '',
-    search3Results: [],
-    artist3Tracks: [],
-    finalPlaylist: [],
+    mood: '',
+    bpm: '',
+    tracks: [],
+    step: 1,
 }
 
 const store = createStore(rootReducer, defaultState, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
