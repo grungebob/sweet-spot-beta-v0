@@ -1,4 +1,5 @@
 function tracks(state = [], action){
+    console.log('TRACKS REDUCER: ', action);
     switch(action.type) {
         case 'SET_TRACKS' :
             return {

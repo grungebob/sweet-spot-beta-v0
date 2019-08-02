@@ -10,17 +10,6 @@ But the react components understand it
 */
 const  spot = require('./spotifyKey');
 
-
-
-/*
-const Spotify = require('node-spotify-api');
-
-const spot = new Spotify({
-    id: 'a6c3fc9fc35f459394775a03044f4e75',
-    secret: '6aa61a57428341038924b598d6c97fc9'
-  });
-  */
-
 const express = require('express');
 const app = express();
 const port = process.env.PORT || 5000;
@@ -141,8 +130,9 @@ app.post('/multipleFeatures', async (req, res)=> {
   for (let i = 0; i < allTracks.length + 100; i += 100){
     const miniArr = allTracks.slice(i, i + 100);
     const featuresQuery = miniArr.join('%2C');
-    promises.push(spotify
-     .request('https://api.spotify.com/v1/audio-features?ids=' + featuresQuery))
+    promises.push(
+      spot
+        .request('https://api.spotify.com/v1/audio-features?ids=' + featuresQuery))
       
   }
   Promise.all(promises).then(responses => {

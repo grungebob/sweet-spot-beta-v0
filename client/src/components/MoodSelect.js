@@ -2,7 +2,7 @@ import React from 'react';
 
 const MoodSelect = (props) => {
     // QUESTION: WHY is it in props.mood.mood?
-    console.log('MOOD SELECT PROPS: ', props);
+    // console.log('MOOD SELECT PROPS: ', props);
         return (
             <div>
                 <h2>Select your desired mood: {props.mood.selectedMood}</h2>

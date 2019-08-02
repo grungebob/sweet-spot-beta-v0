@@ -10,18 +10,16 @@ class ArtistSelect extends React.Component{
     constructor(props) {
         super(props);
         this.state = { 
-          data: null,
-          items: [],
           searchTerm: '',
           searchResults: [],
           artistTracks: [],
+          artist: ''
         }
         this.onChange = this.onChange.bind(this);
         this.onKeyPress = this.onKeyPress.bind(this);
       }
 
       searchForAnArtist = async (name) => {
-        // console.log('SEARCHING FOR: ', name);
         const response = await fetch('/artistSearch', {
           method: 'POST',
           body: JSON.stringify({
@@ -30,7 +28,6 @@ class ArtistSelect extends React.Component{
           headers: {"Content-Type": "application/json"}
         });
         const body = await response.json();
-        // console.log('BODY: ', body);
         this.setState({
           searchResults: body
         });
@@ -53,6 +50,10 @@ class ArtistSelect extends React.Component{
       }
     
       findTracks = async (artist) => {
+          this.setState({
+              artist: artist.name
+          })
+
         let allTracks = [];
         const response = await fetch('/findAlbums', {
           method: 'POST',
@@ -107,12 +108,13 @@ class ArtistSelect extends React.Component{
         });
         const audioFeatures = await resAudioFeatures.json()
         console.log('AUDIO FEATURES ARRAY: ', audioFeatures);
+        this.props.setTracks(this.state.artist, audioFeatures);
       }
     
       render() {
         return (
             <div className="App-body">
-              <h2>Select an artist you like:</h2>
+              <h2>Select an artist you like: {this.state.artist}</h2>
               <input type="text" placeholder="Enter Artist Name" value={this.state.searchTerm} onChange={this.onChange} onKeyPress = {this.onKeyPress}/>
               <div className='Artist-list'>
                 {this.state.searchResults.map((artist) => 
@@ -122,7 +124,6 @@ class ArtistSelect extends React.Component{
                   </div>
                 )}
               </div>
-             
             </div>
         );
       }
