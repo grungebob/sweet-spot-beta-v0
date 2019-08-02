@@ -34,7 +34,7 @@ class ArtistSelect extends React.Component{
       }
     
       onChange (e) {
-        console.log('PROPS: ', this.props);
+        // console.log('PROPS: ', this.props);
         this.setState({
           searchTerm: e.target.value
         });
@@ -108,13 +108,13 @@ class ArtistSelect extends React.Component{
         });
         const audioFeatures = await resAudioFeatures.json()
         console.log('AUDIO FEATURES ARRAY: ', audioFeatures);
-        this.props.setTracks(this.state.artist, audioFeatures);
+        this.props.setTracks(this.state.artist, audioFeatures, this.props.mood.selectedMood, this.props.bpm.bpm);
       }
     
       render() {
         return (
             <div className="App-body">
-              <h2>Select an artist you like: {this.state.artist}</h2>
+              <h2>Select artist(s) you like: {this.state.artist}</h2>
               <input type="text" placeholder="Enter Artist Name" value={this.state.searchTerm} onChange={this.onChange} onKeyPress = {this.onKeyPress}/>
               <div className='Artist-list'>
                 {this.state.searchResults.map((artist) => 

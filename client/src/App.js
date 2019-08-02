@@ -9,10 +9,14 @@ import * as actionCreators from './actions/actionCreators'
 import HeartRate from './components/HeartRate';
 import MoodSelect from './components/MoodSelect';
 import ArtistSelect from './components/ArtistSelect';
+import Playlist from './components/Playlist';
+import Step from './components/Step/Step';
+import Stepper from './components/Step/Stepper'
 
 
 class App extends Component {
   render() {
+
     return (
       <div className="App">
         <header className="App-header">
@@ -21,9 +25,20 @@ class App extends Component {
 
         </header>
         <div className="App-body">
-          <HeartRate {...this.props}/>
-          <MoodSelect {...this.props}/>
-          <ArtistSelect {...this.props}/>
+          <Stepper step = {this.props.step}>
+            <Step >
+               <HeartRate {...this.props}/>
+               <MoodSelect {...this.props}/>
+            </Step>
+            <Step>
+              <ArtistSelect {...this.props}/>
+            </Step>
+            <Step>
+              <Playlist {...this.props}/>
+            </Step>
+          </Stepper>
+        <div className="stepper" onClick = {() => this.props.setStep(this.props.step + 1)}> NEXT > </div>
+
         </div>
       </div> 
     );
@@ -35,6 +50,7 @@ const mapStatetoProps = state => {
       mood: state.mood,
       bpm: state.bpm,
       tracks: state.tracks,
+      step: state.step,
     };
   }
   

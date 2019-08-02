@@ -144,3 +144,29 @@ app.post('/multipleFeatures', async (req, res)=> {
     console.error('ERROR: ', e)
   });
 })
+
+app.post('/multipleTracks', async (req, res) => {
+  const tracks = req.body.tracks;
+  // console.log('ALL PLAYLIST TRACKS: ', tracks);
+  let newTrack = [];
+  for (let i = 0; i < tracks.length; i += 50) {
+
+  }
+
+})
+
+
+/* Create Playlist
+app.post('/createPlaylist', async(req, res) => {
+  console.log('CREATE PLAYLIST REQ: ', req);
+  spot
+    .request('https://api.spotify.com/v1/playlists')
+      .then(response => {
+        console.log('RESPONSE: ', response)
+      })
+      .catch(e => {
+        console.log("ERROR: ", e);
+      })
+})
+
+*/

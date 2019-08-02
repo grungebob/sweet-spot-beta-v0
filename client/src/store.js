@@ -12,16 +12,8 @@ const browserHistory = createBrowserHistory();
 const defaultState = {
     mood: '',
     bpm: '',
-    search1Term: '',
-    search1Results: [],
-    artist1Tracks: [],
-    search2Term: '',
-    search2Results: [],
-    artist2Tracks: [],
-    search3Term: '',
-    search3Results: [],
-    artist3Tracks: [],
-    finalPlaylist: [],
+    tracks: [],
+    step: 1,
 }
 
 const store = createStore(rootReducer, defaultState, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());

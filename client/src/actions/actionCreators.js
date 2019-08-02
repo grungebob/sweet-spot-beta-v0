@@ -12,11 +12,21 @@ export const setBpm = (bpm) => {
     }
 }
 
-export const setTracks = (artist, tracks) => {
-    console.log("ACTION CREATORS setArtist ", artist)
+export const setTracks = (artist, tracks, mood, heartRate) => {
+    // console.log("ACTION CREATORS setTracks ", artist)
     return {
         type: 'SET_TRACKS',
         artist,
-        tracks
+        tracks,
+        mood,
+        heartRate
+    }
+}
+
+export const setStep = (step) => {
+    // console.log('STEP: ', step);
+    return {
+        type: 'SET_STEP',
+        step
     }
 }
